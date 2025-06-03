@@ -67,14 +67,14 @@
             "id": "c248b30e7c7bae72",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "split-diff-view",
               "state": {
-                "file": "Offer Run/AA.md",
-                "mode": "source",
-                "source": false
+                "aFile": "Offer Run/AA.md",
+                "bFile": "Offer Run/AA.md",
+                "aRef": ""
               },
-              "icon": "lucide-file",
-              "title": "AA"
+              "icon": "diff",
+              "title": "Diff: AA"
             }
           }
         ],
