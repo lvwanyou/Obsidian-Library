@@ -86,7 +86,18 @@ textureView.setSurfaceTextureListener(new TextureView.SurfaceTextureListener() {
 
 
 
-GlSurfaceView 做
+GlSurfaceView 做渲染
+- 通过 `GLSurfaceView` 和 OpenGL ES 2.0 渲染 Bitmap 的完整流程包括：
+    
+    1. **初始化 EGL 环境**（由 `GLSurfaceView` 自动完成）。
+        
+    2. **加载纹理**（将 Bitmap 上传到 GPU）。
+        
+    3. **编写着色器**（定义渲染规则）。
+        
+    4. **绘制帧**（绑定数据并调用绘制指令）。
+        
+- 最终由 SurfaceFlinger 在 VSYNC 信号触发时合成上屏。
 ```
 public class BitmapRenderer implements GLSurfaceView.Renderer {
     private final Context context;

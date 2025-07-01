@@ -15,6 +15,7 @@
       "2025-06-03 Offer Run/jvm.md"
     ],
     "日记": [
+      "日记/2025-07-01",
       "日记/2025-06-30",
       "日记/2025-06-30.md",
       "日记/2025-06-29.md",
@@ -46,6 +47,9 @@
       "日记/2025-06-30/surfaceView 和 textureView 有什么不同.md",
       "日记/2025-06-30/handler 的 postdelay 是如何实现的.md",
       "日记/2025-06-30/同步屏障（Sync Barrier）.md"
+    ],
+    "日记/2025-07-01": [
+      "日记/2025-07-01/Synchronized.md"
     ],
     "Meituan Blog": [],
     "Pictures": [
