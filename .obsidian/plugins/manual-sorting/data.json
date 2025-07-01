@@ -49,7 +49,8 @@
       "日记/2025-06-30/同步屏障（Sync Barrier）.md"
     ],
     "日记/2025-07-01": [
-      "日记/2025-07-01/Synchronized.md"
+      "日记/2025-07-01/Synchronized 和 CAS 的性能差异.md",
+      "日记/2025-07-01/动态化如何做性能优化.md"
     ],
     "Meituan Blog": [],
     "Pictures": [
