@@ -57,6 +57,9 @@
       "日记/2025-07-01/动态化如何做性能优化.md"
     ],
     "日记/2025-07-02": [
+      "日记/2025-07-02/surfaceFlinger 会将 surfaceView 的surface 内容和 activity的surface 内容组合到一起再上屏吗.md",
+      "日记/2025-07-02/正常的 activity 中的都有 surface 吗，不是只有 surfaceview 或者 textureView 这些才有 surface 吗.md",
+      "日记/2025-07-02/View 系统的层级限制 及 View 的 surface 绘制.md",
       "日记/2025-07-02/SurfaceFlinger 合成界面，最终显示到屏幕。 这个怎么理解啊.md",
       "日记/2025-07-02/App 启动有哪些步骤.md"
     ],
