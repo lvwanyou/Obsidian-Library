@@ -1,7 +1,6 @@
 {
   "customFileOrder": {
     "/": [
-      "那视频解码的时候呢，假设用 mediaCodec 解码，然后用 glSurfaceView 将对应的纹理上屏.md",
       "日记",
       "2025-06-03 Offer Run",
       "Meituan Blog",
@@ -69,6 +68,9 @@
       "日记/2025-07-02/App 启动有哪些步骤.md"
     ],
     "日记/2025-07-03": [
+      "日记/2025-07-03/textureView 和 activity 共用一个 surface， 那 textureView 的刷新也是在主线程吗.md",
+      "日记/2025-07-03/MediaCodec 如何做到解码的数据和 surfaceTexture.updateTexImage(); 更新的数据是对齐的.md",
+      "日记/2025-07-03/那视频解码的时候呢，假设用 mediaCodec 解码，然后用 glSurfaceView 将对应的纹理上屏.md",
       "日记/2025-07-03/surfaceTexture 和 surface 和 glsurfaceView 之间是什么关系呢.md",
       "日记/2025-07-03/双亲委托机制（Parent Delegation Model）.md",
       "日记/2025-07-03/String a = new String(\"a\") 和 String a = \"a\" 有什么不同吗.md",
