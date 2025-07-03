@@ -1,7 +1,7 @@
 {
   "customFileOrder": {
     "/": [
-      "surfaceTexture 和 surface 和 glsurfaceView 之间是什么关系呢.md",
+      "那视频解码的时候呢，假设用 mediaCodec 解码，然后用 glSurfaceView 将对应的纹理上屏.md",
       "日记",
       "2025-06-03 Offer Run",
       "Meituan Blog",
@@ -69,6 +69,7 @@
       "日记/2025-07-02/App 启动有哪些步骤.md"
     ],
     "日记/2025-07-03": [
+      "日记/2025-07-03/surfaceTexture 和 surface 和 glsurfaceView 之间是什么关系呢.md",
       "日记/2025-07-03/双亲委托机制（Parent Delegation Model）.md",
       "日记/2025-07-03/String a = new String(\"a\") 和 String a = \"a\" 有什么不同吗.md",
       "日记/2025-07-03/字符串常量池是在堆上还是非堆上呢.md"
