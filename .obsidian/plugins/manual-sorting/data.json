@@ -1,7 +1,6 @@
 {
   "customFileOrder": {
     "/": [
-      "Android 热修复.md",
       "日记",
       "2025-06-03 Offer Run",
       "Meituan Blog",
@@ -79,6 +78,7 @@
       "日记/2025-07-03/字符串常量池是在堆上还是非堆上呢.md"
     ],
     "日记/2025-07-07": [
+      "日记/2025-07-07/Android 热修",
       "日记/2025-07-07/kotlin 的 lazy 原理.md",
       "日记/2025-07-07/设计模式有哪些.md",
       "日记/2025-07-07/http 中的 get 和 post 的区别是什么.md",
@@ -90,6 +90,11 @@
       "Pictures/Pasted image 20250612140849.png",
       "Pictures/Pasted image 20250617164108.png",
       "Pictures/Pasted image 20250612140756.png"
+    ],
+    "日记/2025-07-07/Android 热修": [
+      "日记/2025-07-07/Android 热修/类加载机制：通过修改 dex 加载顺序实现修复。，可以举个具体的例子说明吗，是怎么修改 classLoader 实现的呢.md",
+      "日记/2025-07-07/Android 热修/那对应的 dex 应该要从远端下载吧，整个下载到成功的流程要在应用启动最前面吗，这个是怎么做到的呢.md",
+      "日记/2025-07-07/Android 热修/Android 热修复.md"
     ]
   },
   "draggingEnabled": true,
