@@ -1,7 +1,6 @@
 {
   "customFileOrder": {
     "/": [
-      "LiveData 的实现原理.md",
       "日记",
       "2025-06-03 Offer Run",
       "Meituan Blog",
@@ -92,6 +91,7 @@
       "日记/2025-07-07/Android 热修/那对应的 dex 应该要从远端下载吧，整个下载到成功的流程要在应用启动最前面吗，这个是怎么做到的呢.md"
     ],
     "日记/2025-07-08": [
+      "日记/2025-07-08/LiveData 的实现原理.md",
       "日记/2025-07-08/android 的虚拟机和 jvm虚拟机有什么不同吗.md",
       "日记/2025-07-08/String 和 StringBuilder 的不同.md",
       "日记/2025-07-08/Android 的分层.md",
