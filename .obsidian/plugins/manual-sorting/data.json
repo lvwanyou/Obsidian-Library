@@ -1,6 +1,7 @@
 {
   "customFileOrder": {
     "/": [
+      "LiveData 的实现原理.md",
       "String 和 StringBuilder 的不同.md",
       "Android 的分层.md",
       "thread 中的 wait 和 yield 的不同.md",
@@ -98,6 +99,7 @@
     ],
     "Meituan Blog": [],
     "Pictures": [
+      "Pictures/Pasted image 20250708115707.png",
       "Pictures/Pasted image 20250612140833.png",
       "Pictures/Pasted image 20250612140849.png",
       "Pictures/Pasted image 20250617164108.png",
