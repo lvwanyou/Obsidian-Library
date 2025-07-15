@@ -1,12 +1,3 @@
-简历完善
-Peacock 项目再次梳理  && hotpot 项目梳理
-java 基础： https://github.com/CyC2018/CS-Notes?tab=readme-ov-file
-
-剑指offer coding（小红书coding）
-Opengl Es 书籍学习
-
-
-### Android 性能优化
 #### 布局优化
 #### 绘制优化
 #### 内存泄露优化
