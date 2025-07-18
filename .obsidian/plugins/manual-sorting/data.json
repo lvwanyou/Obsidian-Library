@@ -52,6 +52,8 @@
       "日记/2025-06-26/2025-06-26.md"
     ],
     "日记/2025-06-30": [
+      "日记/2025-06-30/synchronized作用于类上的实现原理.md",
+      "日记/2025-06-30/音视频，让你选一个设计模式构造你的项目，mvc 、mvp或者 mvmm.md",
       "日记/2025-06-30/surfaceFlinger.md",
       "日记/2025-06-30/activity 和 fragment 的生命周期的不同.md",
       "日记/2025-06-30/SurfaceView 和 textureView  渲染.md",
