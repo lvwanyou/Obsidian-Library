@@ -132,7 +132,7 @@
     **开发便捷性**（普通 `View`） vs. **极致性能**（直接控制 `Surface`）。
     
 
-那 surfaceFlinger 会将 surfaceView 的surface 内容和 activity的surface 内容组合到一起再上屏吗
+## 那 surfaceFlinger 会将 surfaceView 的surface 内容和 activity的surface 内容组合到一起再上屏吗
 
 是的，**SurfaceFlinger 会将 `SurfaceView` 的 `Surface` 内容和 Activity 的普通 `Surface` 内容组合（合成）到一起，最终输出到屏幕**。但关键在于，**`SurfaceView` 的合成方式与普通 View 不同**，这直接影响性能和渲染效率。以下是详细解析：
 
