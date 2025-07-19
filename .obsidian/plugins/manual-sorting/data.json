@@ -14,6 +14,7 @@
       "2025-06-03 Offer Run/jvm.md"
     ],
     "日记": [
+      "日记/2025-07-19",
       "日记/已投递公司.md",
       "日记/面试问题记录.md",
       "日记/2025-07-18",
@@ -119,6 +120,9 @@
     "日记/2025-07-18": [
       "日记/2025-07-18/lruCache 这个怎么理解啊， recyclerView 不是自己有一套 UI 复用的逻辑了吗.md",
       "日记/2025-07-18/实现RecyclerView大图加载的内存优化方案.md"
+    ],
+    "日记/2025-07-19": [
+      "日记/2025-07-19/android 中的 activity 和 textureView 共用一个 surface， 那 textureView 是怎么实现类似 view 的变换的呢.md"
     ],
     "Meituan Blog": [],
     "Pictures": [
