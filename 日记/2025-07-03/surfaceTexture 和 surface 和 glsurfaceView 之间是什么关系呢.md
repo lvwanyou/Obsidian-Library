@@ -27,13 +27,7 @@ surfaceTexture 和 surface 和 glsurfaceView 之间是什么关系呢
     3. **`Surface`** 作为 `SurfaceTexture` 的消费者，将纹理渲染到屏幕（如通过 `SurfaceView` 或 `TextureView`）。
         
 - **代码示例**（相机预览 + OpenGL 处理）：
-    
-    java
-    
-    复制
-    
-    下载
-    
+```java
     // 创建 SurfaceTexture 并监听帧更新
     SurfaceTexture surfaceTexture = new SurfaceTexture(textureId);
     surfaceTexture.setOnFrameAvailableListener(listener);
@@ -45,7 +39,7 @@ surfaceTexture 和 surface 和 glsurfaceView 之间是什么关系呢
     // 在 OpenGL 中渲染纹理
     surfaceTexture.updateTexImage(); // 获取最新帧
     GLES20.glBindTexture(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, textureId);
-    
+```
 
 #### **(2) `GLSurfaceView`：简化 OpenGL 渲染**
 
@@ -56,13 +50,7 @@ surfaceTexture 和 surface 和 glsurfaceView 之间是什么关系呢
     - 自动管理 `EGLContext` 和渲染线程（`GLThread`），开发者只需实现 `Renderer` 接口。
         
 - **代码示例**：
-    
-    java
-    
-    复制
-    
-    下载
-    
+```java
     GLSurfaceView glSurfaceView = new GLSurfaceView(context);
     glSurfaceView.setEGLContextClientVersion(2);
     glSurfaceView.setRenderer(new GLSurfaceView.Renderer() {
@@ -72,8 +60,7 @@ surfaceTexture 和 surface 和 glsurfaceView 之间是什么关系呢
             // 绘制 OpenGL 内容
         }
     });
-    
-
+```
 #### **(3) 组合使用场景**
 
 - **视频滤镜处理**：
@@ -87,12 +74,12 @@ surfaceTexture 和 surface 和 glsurfaceView 之间是什么关系呢
 
 ### **3. 关键区别与联系**
 
-|**对比维度**|**`SurfaceTexture`**|**`Surface`**|**`GLSurfaceView`**|
-|---|---|---|---|
-|**数据流向**|生产者（接收图像流） → 纹理|消费者（接收数据） → 显示|封装了 OpenGL 渲染的 `Surface`|
-|**依赖关系**|需要 OpenGL 纹理绑定|可独立存在，或绑定到 `SurfaceTexture`|依赖 `Surface` 和 EGL 环境|
-|**线程模型**|需在 OpenGL 线程调用 `updateTexImage()`|可跨线程传递（如相机主线程 → 渲染线程）|自带 `GLThread`，渲染方法在子线程执行|
-|**典型用途**|相机预览、视频帧处理|媒体播放、视图渲染|3D 图形、自定义 OpenGL 效果|
+| **对比维度** | **`SurfaceTexture`**              | **`Surface`**               | **`GLSurfaceView`**      |
+| -------- | --------------------------------- | --------------------------- | ------------------------ |
+| **数据流向** | 生产者（接收图像流） → 纹理                   | 消费者（接收数据） → 显示              | 封装了 OpenGL 渲染的 `Surface` |
+| **依赖关系** | 需要 OpenGL 纹理绑定                    | 可独立存在，或绑定到 `SurfaceTexture` | 依赖 `Surface` 和 EGL 环境    |
+| **线程模型** | 需在 OpenGL 线程调用 `updateTexImage()` | 可跨线程传递（如相机主线程 → 渲染线程）       | 自带 `GLThread`，渲染方法在子线程执行 |
+| **典型用途** | 相机预览、视频帧处理                        | 媒体播放、视图渲染                   | 3D 图形、自定义 OpenGL 效果      |
 
 ---
 
