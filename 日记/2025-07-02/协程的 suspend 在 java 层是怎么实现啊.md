@@ -231,13 +231,9 @@ Continuation 所以是kotlin在 字节码中的实现吗
     
     // Kotlin 代码：suspend fun foo(): String
     // 编译后的 Java 伪代码：
-    Object foo(Continuation<? super String> continuation) {
-        // 状态机逻辑...
-    }
+    Object foo(Continuation< super String> continuation) {// 状态机逻辑...}
     
     在字节码中，`Continuation` 就是一个普通的接口，其实现类由编译器生成。
-    
-
 ---
 
 ### 2. **`Continuation` 如何与字节码交互**
