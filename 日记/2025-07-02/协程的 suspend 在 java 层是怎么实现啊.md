@@ -356,7 +356,7 @@ java
 下载
 
 // 编译后的 Java 伪代码
-Object fetchUserData(Continuation<? super String> continuation) {
+Object fetchUserData(Continuation< super String> continuation) {
     // 生成一个状态机实例（如果是首次调用）
     if (continuation instanceof FetchUserDataStateMachine) {
         // 恢复执行：已经存在状态机
@@ -395,7 +395,7 @@ class FetchUserDataStateMachine extends ContinuationImpl {
     String user;
     String data;
     // 外部 Continuation（用于恢复外层协程）
-    Continuation<? super String> completion;
+    Continuation< super String> completion;
 
     @Override
     public Object invokeSuspend(Object result) {
