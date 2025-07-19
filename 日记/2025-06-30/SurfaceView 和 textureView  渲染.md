@@ -86,7 +86,7 @@ textureView.setSurfaceTextureListener(new TextureView.SurfaceTextureListener() {
 
 
 
-GlSurfaceView 做渲染
+## GlSurfaceView 做渲染
 - 通过 `GLSurfaceView` 和 OpenGL ES 2.0 渲染 Bitmap 的完整流程包括：
     
     1. **初始化 EGL 环境**（由 `GLSurfaceView` 自动完成）。
