@@ -18,13 +18,7 @@
 ### **2. 详细步骤与代码实现**
 
 #### **(1) 初始化 `MediaCodec` 解码器**
-
-java
-
-复制
-
-下载
-
+```java
 // 1. 创建 MediaExtractor 获取视频格式（如编码格式、分辨率）
 MediaExtractor extractor = new MediaExtractor();
 extractor.setDataSource(videoPath);
@@ -36,15 +30,10 @@ MediaFormat format = extractor.getTrackFormat(videoTrackIndex);
 MediaCodec codec = MediaCodec.createDecoderByType(format.getString(MediaFormat.KEY_MIME));
 codec.configure(format, surface, null, 0); // 关键：绑定到 Surface
 codec.start();
+```
 
 #### **(2) 创建 `SurfaceTexture` 并绑定到 OpenGL 纹理**
-
-java
-
-复制
-
-下载
-
+```java
 // 1. 生成 OpenGL 纹理 ID
 int[] textureId = new int[1];
 GLES20.glGenTextures(1, textureId, 0);
@@ -62,15 +51,10 @@ surfaceTexture.setOnFrameAvailableListener(new SurfaceTexture.OnFrameAvailableLi
 
 // 3. 将 SurfaceTexture 包装为 Surface，供 MediaCodec 输出
 Surface surface = new Surface(surfaceTexture);
+```
 
 #### **(3) 配置 `GLSurfaceView` 渲染器**
-
-java
-
-复制
-
-下载
-
+```java
 glSurfaceView.setEGLContextClientVersion(2);
 glSurfaceView.setRenderer(new GLSurfaceView.Renderer() {
     private float[] mtx = new float[16];
@@ -98,14 +82,10 @@ glSurfaceView.setRenderer(new GLSurfaceView.Renderer() {
     }
 });
 
+```
+
 #### **(4) 解码循环（在子线程执行）**
-
-java
-
-复制
-
-下载
-
+```java
 ByteBuffer[] inputBuffers = codec.getInputBuffers();
 MediaCodec.BufferInfo bufferInfo = new MediaCodec.BufferInfo();
 boolean isEOS = false;
@@ -131,6 +111,7 @@ while (!isEOS) {
         codec.releaseOutputBuffer(outputBufferIndex, true); // true 表示渲染到 Surface
     }
 }
+```
 
 ---
 
@@ -151,19 +132,12 @@ while (!isEOS) {
 #### **(3) 内存管理**
 
 - 及时释放资源：
-    
-    java
-    
-    复制
-    
-    下载
-    
+```java
     codec.stop();
     codec.release();
     surface.release();
     surfaceTexture.release();
-
-
+```
 
 ### **总结**
 
