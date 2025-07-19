@@ -122,6 +122,7 @@
       "日记/2025-07-18/实现RecyclerView大图加载的内存优化方案.md"
     ],
     "日记/2025-07-19": [
+      "日记/2025-07-19/渲染绘制的 BufferQueue，里面是不是也有两个队列啊.md",
       "日记/2025-07-19/mediaCodec 使用dequeueInputBuffer()和dequeueOutputBuffer()来获得对应的输入和输出Buffer的索引， 那这里面是不是有两个队列啊.md",
       "日记/2025-07-19/android 中的 activity 和 textureView 共用一个 surface， 那 textureView 是怎么实现类似 view 的变换的呢.md"
     ],
