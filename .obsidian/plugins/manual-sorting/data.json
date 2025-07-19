@@ -83,7 +83,7 @@
     ],
     "日记/2025-07-03": [
       "日记/2025-07-03/textureView 和 activity 共用一个 surface， 那 textureView 的刷新也是在主线程吗.md",
-      "日记/2025-07-03/所有 RenderNode（包括独立层的纹理）通过 RenderThread 提交给 GPU。所以，其实 activity 的UI线程并不是真正的执行渲染的线程啊，那 UI 线程为什么会存在 ANR 的问题呢.md",
+      "日记/2025-07-03/Activity 的UI线程并不是真正的执行渲染的线程，那 UI 线程为什么会存在 ANR 的问题呢?.md",
       "日记/2025-07-03/那 postInvalidate 和 requestLayout 有什么不同吗.md",
       "日记/2025-07-03/MediaCodec 如何做到解码的数据和 surfaceTexture.updateTexImage(); 更新的数据是对齐的.md",
       "日记/2025-07-03/那视频解码的时候呢，假设用 mediaCodec 解码，然后用 glSurfaceView 将对应的纹理上屏.md",

@@ -1,3 +1,4 @@
+所有 RenderNode（包括独立层的纹理）通过 RenderThread 提交给 GPU。
 在 Android 的渲染流程中，确实是由 **`RenderThread`** 负责将 `RenderNode` 提交给 GPU 执行最终的绘制，但 **UI 线程（主线程）** 仍然可能因以下原因触发 ANR（Application Not Responding）。以下是详细解析：
 
 ---
