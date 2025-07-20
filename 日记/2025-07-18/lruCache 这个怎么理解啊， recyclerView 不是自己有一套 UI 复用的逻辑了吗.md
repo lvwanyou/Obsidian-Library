@@ -51,8 +51,8 @@ if (cachedBitmap != null) {
 ---
 ### **3. 为什么需要两者配合？**
 
-|场景|RecyclerView复用|LruCache缓存|
-|---|---|---|
-|**首次加载图片**|创建新ViewHolder|缓存新解码的Bitmap|
-|**快速滑动后回滚**|复用之前的ViewHolder|直接从内存获取Bitmap，无需重新解码|
-|**内存不足时**|不影响ViewHolder回收|自动清理最久未使用的Bitmap|
+| 场景          | RecyclerView复用  | LruCache缓存           |
+| ----------- | --------------- | -------------------- |
+| **首次加载图片**  | 创建新ViewHolder   | 缓存新解码的Bitmap         |
+| **快速滑动后回滚** | 复用之前的ViewHolder | 直接从内存获取Bitmap，无需重新解码 |
+| **内存不足时**   | 不影响ViewHolder回收 | 自动清理最久未使用的Bitmap     |
