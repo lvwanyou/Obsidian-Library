@@ -9,7 +9,7 @@
 补丁 Dex 文件通常由服务端下发，客户端在启动时检查是否有新补丁，并下载到本地私有目录（如 `/data/data/<package>/files/` 或 `/data/data/<package>/dexpatch/`）。  
 **关键点：**
 
-- **独立进程下载**（如 mPaaS 的 `tool` 进程），避免主进程崩溃影响下载3。
+- **独立进程下载**（如 mPaaS 的 `tool` 进程），避免主进程崩溃影响下载。
     
 - **校验安全性**（如 MD5/SHA-1 校验），防止被篡改。
     
@@ -18,8 +18,7 @@
 
 **示例代码（简化版）：**
 
-java
-
+```java
 // 在 Application.attachBaseContext() 或 SplashActivity 中触发下载
 public class MyApplication extends Application {
     @Override
@@ -33,7 +32,7 @@ public class MyApplication extends Application {
         loadPatchIfExists();
     }
 }
-
+```
 ---
 
 ### **(2) 加载补丁 Dex**
@@ -51,8 +50,7 @@ public class MyApplication extends Application {
 
 **示例代码：**
 
-java
-
+```java
 private void loadPatchIfExists() {
     File patchDex = new File("/data/data/com.example/app_patch/patch.dex");
     if (!patchDex.exists()) return;
@@ -79,6 +77,7 @@ private void loadPatchIfExists() {
     setDexElements(pathClassLoader, combinedDexElements);
 }
 
+```
 ---
 
 ## **2. 如何确保在应用启动的最前面执行？**
@@ -98,9 +97,7 @@ private void loadPatchIfExists() {
     
 
 **示例：**
-
-xml
-
+```xml
 <!-- AndroidManifest.xml -->
 <application>
     <provider
@@ -109,9 +106,9 @@ xml
         android:exported="false"
         android:initOrder="100" /> <!-- 高优先级 -->
 </application>
+```
 
-java
-
+```java
 public class PatchInitProvider extends ContentProvider {
     @Override
     public boolean onCreate() {
@@ -121,7 +118,7 @@ public class PatchInitProvider extends ContentProvider {
     }
     // ... 其他方法空实现
 }
-
+```
 ---
 
 ## **3. 完整流程示例（结合 Tinker/mPaaS）**

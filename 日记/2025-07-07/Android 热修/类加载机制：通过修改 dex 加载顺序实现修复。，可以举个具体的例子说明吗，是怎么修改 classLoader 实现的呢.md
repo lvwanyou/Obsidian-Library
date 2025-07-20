@@ -3,7 +3,7 @@
 ---
 
 ## **1. Android 的类加载机制**
-
+![[Pasted image 20250720124231.png]]
 Android 使用 `PathClassLoader`（应用主类加载器）加载 APK 中的 `classes.dex`，其关键逻辑是：
 
 1. 类加载时，`ClassLoader` 会遍历 `dexElements` 数组（存储所有 `dex` 文件）。
@@ -25,9 +25,7 @@ Android 使用 `PathClassLoader`（应用主类加载器）加载 APK 中的 `
 ### **（2）动态插入补丁 `dex`**
 
 在应用启动时（如 `Application.attachBaseContext()`），通过反射修改 `PathClassLoader` 的 `dexElements`：
-
-java
-
+```java
 // 1. 获取当前的 PathClassLoader
 PathClassLoader pathClassLoader = (PathClassLoader) getClassLoader();
 
@@ -59,6 +57,7 @@ System.arraycopy(oldDexElements, 0, finalDexElements, newDexElements.length, old
 
 // 6. 将合并后的 dexElements 设置回 ClassLoader
 dexElementsField.set(dexPathList, finalDexElements);
+```
 
 ### **（3）修复生效**
 
@@ -88,16 +87,14 @@ dexElementsField.set(dexPathList, finalDexElements);
 - 在编译阶段，**对所有类插入一个来自独立 `dex` 的空引用**，避免原类被打上 `CLASS_ISPREVERIFIED` 标记。
     
 - 例如：
-    
-    java
-    
-    public class BuggyClass {
+```java
+public class BuggyClass {
         static {
             // 引用一个单独 dex 中的类，避免验证
             System.out.println(AntiVerifyClass.class);
         }
     }
-    
+```
 
 ### **（3）为什么需要重启应用？**
 
