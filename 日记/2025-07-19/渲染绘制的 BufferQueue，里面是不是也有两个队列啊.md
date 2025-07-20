@@ -39,10 +39,9 @@ BufferQueue 通过 **状态机** 管理缓冲区，而非物理上的两个队
     
 
 **流转流程**：
-
-plaintext
-
+```plaintext
 FREE → DEQUEUED → QUEUED → ACQUIRED → FREE
+```
 
 ---
 

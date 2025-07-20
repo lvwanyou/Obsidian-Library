@@ -11,14 +11,11 @@ JNI 是 Java 和本地代码（如 C/C++）交互的桥梁，但它的调用开�
 - **返回值处理**：本地代码返回的结果需转换回 Java 对象。
     
 - **示例**：
-    
-    java
-    
+```java
     // Java → JNI → C
     native String process(String input); // Java 调用
-    
-    c
-    
+```
+```c
     // C 侧实现
     JNIEXPORT jstring JNICALL Java_MyClass_process(JNIEnv *env, jobject obj, jstring input) {
         const char *c_str = (*env)->GetStringUTFChars(env, input, NULL); // 转换 Java String → C 字符串
@@ -27,9 +24,8 @@ JNI 是 Java 和本地代码（如 C/C++）交互的桥梁，但它的调用开�
         (*env)->ReleaseStringUTFChars(env, input, c_str);                // 释放资源
         return java_result;
     }
-    
+```    
     **开销**：每次调用都涉及数据结构的深拷贝和内存分配。
-    
 
 ### **(2) 线程状态切换**
 

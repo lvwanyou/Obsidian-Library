@@ -11,10 +11,7 @@ RecyclerView通过`ViewHolder`模式实现**UI控件复用**：
 - **作用**：避免频繁创建和销毁View，减少布局inflate和findViewById的开销
     
 - **生命周期**：只在屏幕滚动时复用，离开屏幕的ViewHolder会被回收
-    
-
-java
-
+```java
 // 这是RecyclerView自身的复用机制
 @Override
 public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -25,6 +22,7 @@ public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 public void onBindViewHolder(ViewHolder holder, int position) {
     // 绑定数据到复用的ViewHolder
 }
+```
 
 ---
 
@@ -38,9 +36,7 @@ LruCache是**数据缓存**（特别是Bitmap）：
     
 - **生命周期**：贯穿整个应用生命周期，直到内存不足时自动清理
     
-
-java
-
+```java
 // 示例：用LruCache缓存Bitmap
 LruCache<String, Bitmap> memoryCache = new LruCache<>(maxMemory);
 
@@ -51,9 +47,8 @@ if (cachedBitmap != null) {
 } else {
     // 需要异步加载图片
 }
-
+```
 ---
-
 ### **3. 为什么需要两者配合？**
 
 |场景|RecyclerView复用|LruCache缓存|

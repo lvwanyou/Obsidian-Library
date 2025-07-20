@@ -6,8 +6,9 @@
 ### 1.1 双阶段解码技术
 
 这是避免OOM的核心技术，通过`inJustDecodeBounds`先获取图片尺寸信息，再计算合适的采样率：
+```java
 
-java
+```
 
 public static Bitmap decodeSampledBitmapFromResource(Resources res, int resId, 
         int reqWidth, int reqHeight) {

@@ -46,13 +46,11 @@
 ### 5. **关键代码逻辑**
 
 - `TextureView` 的变换通过 `View` 的 `transformMatrix` 实现：
-    
-    java
-    
+```java
     // 内部会调用 setTransform() 应用矩阵到 SurfaceTexture
     textureView.setRotation(45f);
     textureView.setScaleX(0.5f);
-    
+```
 - 底层通过 `SurfaceTexture#setTransform(float[] matrix)` 同步纹理的坐标系变换。
     
 

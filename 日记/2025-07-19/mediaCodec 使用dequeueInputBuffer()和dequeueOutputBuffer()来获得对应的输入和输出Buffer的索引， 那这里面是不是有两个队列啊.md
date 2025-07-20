@@ -23,8 +23,7 @@
 
 ### 2. **队列的工作流程**
 
-plaintext
-
+```plaintext
 Input Side:
 1. dequeueInputBuffer() → 获取空闲输入缓冲区索引。
 2. 填充数据（如从相机/文件读取）。
@@ -34,7 +33,7 @@ Output Side:
 1. dequeueOutputBuffer() → 获取已处理的输出缓冲区索引。
 2. 读取数据（如写入文件/渲染到Surface）。
 3. releaseOutputBuffer() → 释放缓冲区以供复用。
-
+```
 ---
 
 ### 3. **队列的底层实现**
@@ -64,9 +63,7 @@ Output Side:
 ---
 
 ### 5. **示例代码片段**
-
-java
-
+```java
 // 输入队列（编码）
 int inputBufferId = codec.dequeueInputBuffer(timeoutUs);
 if (inputBufferId >= 0) {
@@ -83,7 +80,7 @@ if (outputBufferId >= 0) {
     // 处理输出数据（如写入文件）
     codec.releaseOutputBuffer(outputBufferId, false);
 }
-
+```
 ---
 
 ### 6. **为什么需要双队列？**
