@@ -17,13 +17,11 @@ val myLazyValue: String by lazy { "Hello" }
 - 编译器会将 `myLazyValue` 转换为一个**委托属性**，委托给 `Lazy<T>` 类型的实例。
     
 - 生成的代码类似于：
-    
-    kotlin
-    
+```kotlin
     private val myLazyValue$delegate = LazyKt.lazy { "Hello" }
     val myLazyValue: String
         get() = myLazyValue$delegate.value
-    
+```
 
 #### （2）运行时阶段
 
@@ -39,10 +37,9 @@ val myLazyValue: String by lazy { "Hello" }
 #### （3）首次访问时的行为
 
 当第一次调用 `.value` 时：
-
-kotlin
-
+```kotlin
 val value = myLazyValue // 触发初始化
+```
 
 - 检查 `_value` 是否为 `UNINITIALIZED_VALUE`。
     
@@ -67,9 +64,7 @@ val value = myLazyValue // 触发初始化
 ### 3. 源码分析（简化版）
 
 以 Kotlin 标准库中的 `SynchronizedLazyImpl` 为例：
-
-kotlin
-
+```kotlin
 private class SynchronizedLazyImpl<out T>(
     initializer: () -> T,
     lock: Any? = null
@@ -97,6 +92,7 @@ private class SynchronizedLazyImpl<out T>(
             }
         }
 }
+```
 
 - 通过 `@Volatile` 和 `synchronized` 保证线程安全。
     
@@ -110,10 +106,9 @@ private class SynchronizedLazyImpl<out T>(
 ### 4. 对比编译时初始化
 
 如果你想要**编译时初始化**，应该用 `const val`（仅限于基本类型和字符串）：
-
-kotlin
-
+```kotlin
 const val MY_CONST = "Hello" // 编译时确定值
+```
 
 而 `lazy` 的初始化是**运行时延迟执行**的，两者有本质区别。
 
@@ -129,8 +124,3 @@ const val MY_CONST = "Hello" // 编译时确定值
     
 
 这种设计使得 `lazy` 能够灵活地延迟耗时的初始化操作到实际需要时，同时保证线程安全。
-
-
-
-
-#类加载机制（如 Tinker）：通过修改 dex 加载顺序实现修复。，可以举个具体的例子说明吗，是怎么修改 classLoader 实现的呢
