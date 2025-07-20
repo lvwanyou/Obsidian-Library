@@ -23,26 +23,25 @@
     
 - **示例**：
 ```java
-
+    // 自定义 View 的 onDraw() 中有耗时操作
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        heavyCalculation(); // 耗时计算（如解析大图片）
+    }
+    
 ```
-    
-    java
-    
-
     **结果**：UI 线程卡顿 → 用户操作无响应 → ANR。
     
-
 #### **(2) 主线程的其他阻塞操作**
 
 - **非渲染相关任务**：  
     主线程若执行网络请求、数据库读写、大文件操作等，会直接阻塞所有 UI 更新和输入事件。
-    
-    java
-    
-    button.setOnClickListener(v -> {
+```java
+button.setOnClickListener(v -> {
         Thread.sleep(5000); // 主线程休眠 5 秒 → ANR
     });
-    
+```
 
 #### **(3) 同步屏障（Sync Barrier）阻塞**
 
@@ -84,10 +83,8 @@
 #### **(2) 拆分耗时绘制**
 
 - 将 `onDraw()` 中的复杂计算移至后台线程，通过 `postInvalidate()` 触发重绘。
-    
-    java
-    
-    @Override
+```java
+@Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         // 耗时操作移至子线程
@@ -99,7 +96,7 @@
             });
         }).start();
     }
-    
+```
 
 #### **(3) 使用硬件加速**
 
@@ -107,19 +104,17 @@
 ```xml
 <application android:hardwareAccelerated="true">
 ```
-	硬件加速将部分绘制操作（如 `Canvas` 变换）转移到 `RenderThread`。   
+硬件加速将部分绘制操作（如 `Canvas` 变换）转移到 `RenderThread`。   
 
 #### **(4) 监控主线程耗时**
 
 - 使用 **`StrictMode`** 检测主线程的磁盘/网络操作：
-    
-    java
-    
-    StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+```java
+StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
         .detectAll()
         .penaltyLog()
         .build());
-    
+```
 
 ---
 

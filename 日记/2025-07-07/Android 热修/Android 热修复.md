@@ -9,7 +9,7 @@ Android 的类加载机制采用 **双亲委托模型**（Parent Delegation Mod
 #### **实现方式**
 
 - **Dex 插桩**：  
-    将修复后的类打包成新的 `dex` 文件，并通过反射修改 `PathClassLoader` 的 `dexElements` 数组，使其优先加载修复后的类，而不是原类35。
+    将修复后的类打包成新的 `dex` 文件，并通过反射修改 `PathClassLoader` 的 `dexElements` 数组，使其优先加载修复后的类，而不是原类。
     
     - **示例**：QQ空间的超级补丁方案、Tinker。
         
@@ -73,11 +73,11 @@ Android Studio 的 Instant Run 技术也采用了类似热修复的思想，但�
 
 ## **主流热修复方案对比**
 
-|方案|原理|是否需重启|兼容性|代表框架|
-|---|---|---|---|---|
-|**类加载替换**|修改 `dexElements` 加载顺序|是|高|Tinker, QZone|
-|**Native 替换**|修改 `ArtMethod` 指针|否|中（部分机型不兼容）|AndFix, Sophix|
-|**Instant Run**|插桩 + 动态代理|部分情况需要|仅开发环境|Robust|
+| 方案              | 原理                    | 是否需重启  | 兼容性        | 代表框架           |
+| --------------- | --------------------- | ------ | ---------- | -------------- |
+| **类加载替换**       | 修改 `dexElements` 加载顺序 | 是      | 高          | Tinker, QZone  |
+| **Native 替换**   | 修改 `ArtMethod` 指针     | 否      | 中（部分机型不兼容） | AndFix, Sophix |
+| **Instant Run** | 插桩 + 动态代理             | 部分情况需要 | 仅开发环境      | Robust         |
 
 ---
 

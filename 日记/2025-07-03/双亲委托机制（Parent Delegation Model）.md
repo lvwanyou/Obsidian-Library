@@ -1,0 +1,1 @@
+Reference: [CS-Notes/notes/Java 虚拟机.md at master · CyC2018/CS-Notes](https://github.com/CyC2018/CS-Notes/blob/master/notes/Java%20%E8%99%9A%E6%8B%9F%E6%9C%BA.md#minor-gc-%E5%92%8C-full-gc)
