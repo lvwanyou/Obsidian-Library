@@ -19,8 +19,7 @@ LiveData 是 Android Jetpack 组件库中的一个**可观察数据持有类**�
 
 ### **(1) 基本结构**
 
-java
-
+```java
 public abstract class LiveData<T> {
     private final Object mDataLock = new Object();
     private volatile Object mData; // 存储数据
@@ -28,12 +27,12 @@ public abstract class LiveData<T> {
     // 其他关键方法...
 }
 
+```
+
 ### **(2) 注册观察者**
 
 通过 `observe(LifecycleOwner, Observer)` 方法绑定观察者：
-
-java
-
+```java
 public void observe(@NonNull LifecycleOwner owner, @NonNull Observer<? super T> observer) {
     // 包装观察者，使其具有生命周期感知能力
     LifecycleBoundObserver wrapper = new LifecycleBoundObserver(owner, observer);
@@ -42,13 +41,12 @@ public void observe(@NonNull LifecycleOwner owner, @NonNull Observer<? super T> 
     // 关联生命周期
     owner.getLifecycle().addObserver(wrapper);
 }
+```
 
 ### **(3) 生命周期绑定**
 
 `LifecycleBoundObserver` 是 `ObserverWrapper` 的子类，监听生命周期状态：
-
-java
-
+```java
 class LifecycleBoundObserver extends ObserverWrapper implements LifecycleEventObserver {
     @Override
     public void onStateChanged(@NonNull LifecycleOwner source, @NonNull Lifecycle.Event event) {
@@ -59,24 +57,22 @@ class LifecycleBoundObserver extends ObserverWrapper implements LifecycleEventOb
         activeStateChanged(shouldBeActive()); // 检查是否活跃
     }
 }
+```
 
 ### **(4) 数据更新与通知**
 
 - **`setValue(T)`**（主线程调用）：
-    
-    java
-    
+```java
     protected void setValue(T value) {
         assertMainThread("setValue");
         mVersion++; // 数据版本号递增
         mData = value; // 更新数据
         dispatchingValue(null); // 通知观察者
     }
-    
-- **`postValue(T)`**（子线程调用，内部通过 `Handler` 切换到主线程）：
-    
-    java
-    
+```
+
+- **`postValue(T)`**（子线程调用，内部通过 `Handler` 切换到主线程）：    
+```java
     protected void postValue(T value) {
         boolean postTask;
         synchronized (mDataLock) {
@@ -87,14 +83,12 @@ class LifecycleBoundObserver extends ObserverWrapper implements LifecycleEventOb
             ArchTaskExecutor.getInstance().postToMainThread(mPostValueRunnable);
         }
     }
-    
+```
 
 ### **(5) 通知观察者**
 
 `dispatchingValue()` 方法遍历所有观察者，仅通知活跃的：
-
-java
-
+```java
 void dispatchingValue(@Nullable ObserverWrapper initiator) {
     for (Map.Entry<Observer<? super T>, ObserverWrapper> entry : mObservers) {
         if (entry.getValue().shouldBeActive()) {
@@ -102,6 +96,7 @@ void dispatchingValue(@Nullable ObserverWrapper initiator) {
         }
     }
 }
+```
 
 ---
 
@@ -180,8 +175,10 @@ void dispatchingValue(@Nullable ObserverWrapper initiator) {
 LiveData 通过 **版本号（`mVersion`）** 精确追踪数据变化，确保观察者只接收最新数据：
 
 - **每次数据更新时递增版本号**
-    
-    java
+```java
+
+```
+
     
     // LiveData.java
     protected void setValue(T value) {
@@ -196,8 +193,10 @@ LiveData 通过 **版本号（`mVersion`）** 精确追踪数据变化，确�
     
 - **仅通知版本更新的观察者**  
     在分发数据时，比较观察者的 `mLastVersion` 和 LiveData 的当前版本：
-    
-    java
+```java
+
+```
+
     
     // ObserverWrapper.java
     void dispatchUpdate(T newValue) {
@@ -221,8 +220,10 @@ LiveData 通过 **版本号（`mVersion`）** 精确追踪数据变化，确�
 ### 2. **数据相等性判断（避免冗余更新）**
 
 对于复杂数据结构（如对象、列表），LiveData **默认使用 `equals()` 判断数据是否变化**：
+```java
 
-java
+```
+
 
 // LiveData.java
 private static final Object NOT_SET = new Object();
@@ -237,8 +238,10 @@ public void setValue(T value) {
 }
 
 **开发者可覆写 `equals()` 优化性能**：
+```kotlin
 
-kotlin
+```
+
 
 data class User(val id: Long, val name: String) {
     // 自定义相等性逻辑（例如仅比较id）
