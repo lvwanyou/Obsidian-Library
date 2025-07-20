@@ -176,10 +176,6 @@ LiveData 通过 **版本号（`mVersion`）** 精确追踪数据变化，确�
 
 - **每次数据更新时递增版本号**
 ```java
-
-```
-
-    
     // LiveData.java
     protected void setValue(T value) {
         assertMainThread("setValue");
@@ -187,17 +183,14 @@ LiveData 通过 **版本号（`mVersion`）** 精确追踪数据变化，确�
         mData = value;
         dispatchingValue(null);
     }
-    
+```
+
 - **观察者注册时记录当前版本号**  
     每个观察者（`ObserverWrapper`）内部保存一个 `mLastVersion`，初始值为 `-1`（表示未接收过数据）。
     
 - **仅通知版本更新的观察者**  
     在分发数据时，比较观察者的 `mLastVersion` 和 LiveData 的当前版本：
 ```java
-
-```
-
-    
     // ObserverWrapper.java
     void dispatchUpdate(T newValue) {
         if (mLastVersion >= mVersion) {
@@ -206,7 +199,7 @@ LiveData 通过 **版本号（`mVersion`）** 精确追踪数据变化，确�
         mLastVersion = mVersion;
         mObserver.onChanged(newValue); // 通知观察者
     }
-    
+```
 
 **优势**：
 
@@ -221,10 +214,6 @@ LiveData 通过 **版本号（`mVersion`）** 精确追踪数据变化，确�
 
 对于复杂数据结构（如对象、列表），LiveData **默认使用 `equals()` 判断数据是否变化**：
 ```java
-
-```
-
-
 // LiveData.java
 private static final Object NOT_SET = new Object();
 
@@ -236,19 +225,17 @@ public void setValue(T value) {
     mData = value;
     dispatchingValue(null);
 }
+```
 
 **开发者可覆写 `equals()` 优化性能**：
 ```kotlin
-
-```
-
-
 data class User(val id: Long, val name: String) {
     // 自定义相等性逻辑（例如仅比较id）
     override fun equals(other: Any?): Boolean {
         return (other as? User)?.id == this.id
     }
 }
+```
 
 ---
 
@@ -258,19 +245,15 @@ LiveData 通过双重检查确保只通知**活跃的观察者**：
 
 1. **生命周期状态筛选**  
     `LifecycleBoundObserver` 会监听宿主（如 Activity）的生命周期，仅在 `STARTED` 或 `RESUMED` 时标记为活跃。
-    
-    java
-    
+```java
     // LifecycleBoundObserver.java
     boolean shouldBeActive() {
         return mOwner.getLifecycle().getCurrentState().isAtLeast(STARTED);
     }
-    
+```
 2. **数据分发时的二次确认**  
     即使数据变化，仅活跃观察者会收到回调：
-    
-    java
-    
+```java
     // LiveData.java
     void dispatchingValue(ObserverWrapper initiator) {
         for (ObserverWrapper observer : mObservers) {
@@ -279,16 +262,13 @@ LiveData 通过双重检查确保只通知**活跃的观察者**：
             }
         }
     }
-    
-
+```
 ---
 
 ### **复杂数据结构的处理技巧**
 
 若数据是可变对象（如 `List`），需通过 **不可变拷贝** 或 **手动触发更新**：
-
-kotlin
-
+```kotlin
 // 方案1：创建新对象触发更新
 val userList = mutableListOf<User>()
 fun updateList() {
@@ -302,7 +282,7 @@ fun updateList() {
     userList.add(newUser)
     liveData.value = liveData.value // 强制触发更新
 }
-
+```
 ---
 
 ### **总结：LiveData 的更新通知机制**

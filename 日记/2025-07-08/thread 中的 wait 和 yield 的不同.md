@@ -34,16 +34,14 @@
     - 通常用于生产者-消费者模型。
         
 - **示例**：
-    
-    java
-    
+```java
     synchronized (lock) {
         while (conditionNotMet) {
             lock.wait(); // 释放锁并等待
         }
         // 被唤醒后继续执行
     }
-    
+```
 
 #### **(2) `join()`：线程顺序控制**
 
@@ -57,34 +55,29 @@
     - 底层通过 `wait()` 实现，但不需要手动加锁。
         
 - **示例**：
-    
-    java
-    
+```java
     Thread childThread = new Thread(() -> { /* 任务 */ });
     childThread.start();
     childThread.join(); // 主线程阻塞，直到 childThread 结束
-    
+```
 
 #### **(3) `yield()`：礼貌性让步**
 
 - **作用**：  
     提示调度器让出当前线程的 CPU 时间片，但可能立即被重新调度。
-    
 - **特点**：
     
     - 不保证其他线程一定能运行。
         
-    - 适用于优化 CPU 密集型任务的公平性。
+    - **适用于优化 CPU 密集型任务的公平性。**
         
 - **示例**：
-    
-    java
-    
+```java
     while (!taskDone) {
         compute();
         Thread.yield(); // 每轮计算后让出CPU
     }
-    
+```
 
 #### **(4) `sleep()`：精确休眠**
 
@@ -98,40 +91,38 @@
     - 休眠期间线程不可中断（但可通过 `interrupt()` 强制唤醒）。
         
 - **示例**：
-    
-    java
-    
+```java
     try {
         Thread.sleep(1000); // 休眠1秒
     } catch (InterruptedException e) {
         Thread.currentThread().interrupt();
     }
-    
-
+```
 ---
 
 ### **3. 关键区别总结**
 
-|**场景**|**推荐方法**|**原因**|
-|---|---|---|
-|线程间同步等待条件满足|`wait()` + `notify()`|唯一能释放锁的等待机制|
-|等待子线程结束|`join()`|语义明确，无需手动锁管理|
-|短时间固定延迟|`sleep()`|简单可靠，不涉及锁|
-|优化CPU密集型任务调度|`yield()`|减少线程独占CPU时间|
-|高精度定时任务|`LockSupport.parkNanos()`|比 `sleep()` 更精准（纳秒级）|
+| **场景**       | **推荐方法**                  | **原因**               |
+| ------------ | ------------------------- | -------------------- |
+| 线程间同步等待条件满足  | `wait()` + `notify()`     | 唯一能释放锁的等待机制          |
+| 等待子线程结束      | `join()`                  | 语义明确，无需手动锁管理         |
+| 短时间固定延迟      | `sleep()`                 | 简单可靠，不涉及锁            |
+| 优化CPU密集型任务调度 | `yield()`                 | 减少线程独占CPU时间          |
+| 高精度定时任务      | `LockSupport.parkNanos()` | 比 `sleep()` 更精准（纳秒级） |
 
 ---
 
 ### **4. 常见误区**
 
 1. **误用 `yield()` 替代锁**
-    
-    java
-    
-    // 错误！yield() 不能保证线程安全
+```java
+// 错误！yield() 不能保证线程安全
     while (!ready) {
         Thread.yield(); // 应改用 wait()/notify()
     }
+```
+    
+    
     
 2. **混淆 `sleep()` 和 `wait()`**
     
@@ -140,17 +131,14 @@
     - `wait()` 是 `Object` 的方法，必须配合锁使用。
         
 3. **忽略中断处理**
-    
-    java
-    
+```java
     try {
         Thread.sleep(1000);
     } catch (InterruptedException e) {
         // 必须恢复中断状态
         Thread.currentThread().interrupt();
     }
-    
-
+```
 ---
 
 ### **5. 实战建议**
