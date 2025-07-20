@@ -4,15 +4,17 @@
 
 ### **1. 核心区别**
 
-| **特性**    | **Parcelable** (Android)         | **Serializable** (Java) |
-| --------- | -------------------------------- | ----------------------- |
-| **所属平台**  | Android 专用                       | Java 标准库（跨平台）           |
-| **序列化机制** | 手动实现，需覆写 `writeToParcel()` 等方法   | 自动序列化（反射实现）             |
-| **性能**    | **高**（直接操作内存，无反射）                | **低**（反射生成临时对象，GC 压力大）  |
-| **适用场景**  | Android 组件间传递数据（如 Intent、Bundle） | 网络传输或持久化存储（如文件、数据库）     |
-| **代码复杂度** | 较高（需手动实现）                        | 极低（只需声明接口）              |
-| **传输效率**  | 二进制格式，体积小                        | 默认使用 Java 序列化协议，体积较大    |
-| **跨进程支持** | 支持（但需显式处理）                       | 支持                      |
+| **     特性     ** | **Parcelable** (Android)         | **Serializable** (Java) |
+| ---------------- | -------------------------------- | ----------------------- |
+| **所属平台**         | Android 专用                       | Java 标准库（跨平台）           |
+| **序列化机制**        | 手动实现，需覆写 `writeToParcel()` 等方法   | 自动序列化（反射实现）             |
+| **性能**           | **高**（直接操作内存，无反射）                | **低**（反射生成临时对象，GC 压力大）  |
+| **适用场景**         | Android 组件间传递数据（如 Intent、Bundle） | 网络传输或持久化存储（如文件、数据库）     |
+| **代码复杂度**        | 较高（需手动实现）                        | 极低（只需声明接口）              |
+| **传输效率**         | 二进制格式，体积小                        | 默认使用 Java 序列化协议，体积较大    |
+| **跨进程支持**        | 支持（但需显式处理）                       | 支持                      |
+
+>[!question] 反射的耗时问题：[[反射涉及了动态类型的解析，所以 JVM 无法对这些代码进行优化，这个怎么理解呢]]
 
 ---
 
@@ -21,15 +23,14 @@
 #### **(1) `Serializable` 的实现**
 
 只需让类实现 `Serializable` 接口即可，无需额外代码：
-
-java
-
+```java
 // Java/Kotlin
 public class User implements Serializable {
     private String name;
     private int age;
     // 自动序列化（反射完成）
 }
+```
 
 #### **(2) `Parcelable` 的实现**
 
@@ -38,10 +39,7 @@ public class User implements Serializable {
 - `writeToParcel()`：将对象字段写入 `Parcel`。
     
 - `CREATOR`：从 `Parcel` 重建对象。
-    
-
-kotlin
-
+```kotlin
 // Kotlin 示例
 class User(val name: String, val age: Int) : Parcelable {
     constructor(parcel: Parcel) : this(
@@ -65,6 +63,7 @@ class User(val name: String, val age: Int) : Parcelable {
 
     override fun describeContents(): Int = 0
 }
+```
 
 ---
 
@@ -106,22 +105,19 @@ class User(val name: String, val age: Int) : Parcelable {
 #### **(1) 使用 `@Parcelize` 注解（Kotlin）**
 
 通过 Kotlin 扩展插件自动生成 `Parcelable` 代码：
-
-kotlin
-
+```kotlin
 @Parcelize
 data class User(val name: String, val age: Int) : Parcelable
+```
 
 需在 `build.gradle` 中启用：
-
-gradle
-
+```gradle
 android {
     androidExtensions {
         experimental = true
     }
 }
-
+```
 #### **(2) 序列化工具替代方案**
 
 - **JSON（Gson/Moshi）**：适合网络传输，但性能低于 `Parcelable`。

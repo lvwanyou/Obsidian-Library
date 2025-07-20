@@ -11,25 +11,19 @@ JVM 的优化（如 **JIT 编译**）依赖于代码的 **静态可分析性**
 ### **示例对比**
 
 #### **(1) 普通方法调用（可优化）**
-
-java
-
+```java
 // 直接调用方法（静态可知）
 String str = "Hello";
 int length = str.length(); // JVM 可内联优化
-
+```
 - JVM 能确定 `str.length()` 调用的是 `String.length()`，可以内联（Inline）该方法。
-    
 
 #### **(2) 反射调用（不可优化）**
-
-java
-
+```java
 Method method = String.class.getMethod("length");
 int length = (int) method.invoke(str); // JVM 无法提前确定实际调用的方法
-
+```
 - `method.invoke()` 的目标方法在运行时才能确定，JVM 无法静态分析，因此无法内联或做其他优化。
-    
 
 ---
 
@@ -45,13 +39,11 @@ int length = (int) method.invoke(str); // JVM 无法提前确定实际调用的�
 ### **(2) 常量传播（Constant Propagation）失效**
 
 - **普通调用**：如果输入是常量，JVM 会直接计算结果。
-    
-    java
-    
+```java
     int x = Math.max(3, 5); // 直接优化为 int x = 5;
-    
+```
+
 - **反射调用**：参数和方法的绑定是动态的，无法提前计算。
-    
 
 ### **(3) 虚方法优化（Virtual Method Optimization）失效**
 
@@ -80,9 +72,7 @@ int length = (int) method.invoke(str); // JVM 无法提前确定实际调用的�
 ### **(1) 缓存反射对象**
 
 避免重复查找 `Method`/`Field`：
-
-java
-
+```java
 // 缓存 Method 对象
 private static final Method LENGTH_METHOD;
 static {
@@ -95,16 +85,16 @@ static {
 
 // 后续调用复用
 int len = (int) LENGTH_METHOD.invoke(str);
+```
 
 ### **(2) 使用 `MethodHandle`（Java 7+）**
 
 比传统反射更接近 JVM 底层，性能更好：
-
-java
-
+```java
 MethodHandles.Lookup lookup = MethodHandles.lookup();
 MethodHandle mh = lookup.findVirtual(String.class, "length", MethodType.methodType(int.class));
 int len = (int) mh.invoke(str);
+```
 
 ### **(3) 避免反射：代码生成或字节码操作**
 
