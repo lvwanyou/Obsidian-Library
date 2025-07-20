@@ -16,6 +16,7 @@
     "日记": [
       "日记/已投递公司.md",
       "日记/面试问题记录.md",
+      "日记/2025-07-20",
       "日记/2025-07-19",
       "日记/2025-07-18",
       "日记/2025-07-17",
@@ -133,6 +134,10 @@
       "日记/2025-07-19/渲染绘制的 BufferQueue，里面是不是也有两个队列啊.md",
       "日记/2025-07-19/mediaCodec 使用dequeueInputBuffer()和dequeueOutputBuffer()来获得对应的输入和输出Buffer的索引， 那这里面是不是有两个队列啊.md",
       "日记/2025-07-19/android 中的 activity 和 textureView 共用一个 surface， 那 textureView 是怎么实现类似 view 的变换的呢.md"
+    ],
+    "日记/2025-07-20": [
+      "日记/2025-07-20/notify() notifyAll() 有什么不同吗.md",
+      "日记/2025-07-20/Thread.join 跟协程的非阻塞性挂起是否一致.md"
     ],
     "Meituan Blog": [],
     "Pictures": [
