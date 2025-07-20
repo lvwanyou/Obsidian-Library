@@ -22,16 +22,13 @@
     UI 线程需要遍历整个 View 树，计算每个 View 的大小和位置（`measure/layout`），并生成 `DisplayList`（`draw`）。如果视图层级过深或自定义 View 的 `onDraw()` 逻辑复杂，会阻塞主线程。
     
 - **示例**：
+```java
+
+```
     
     java
     
-    // 自定义 View 的 onDraw() 中有耗时操作
-    @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-        heavyCalculation(); // 耗时计算（如解析大图片）
-    }
-    
+
     **结果**：UI 线程卡顿 → 用户操作无响应 → ANR。
     
 
@@ -107,13 +104,10 @@
 #### **(3) 使用硬件加速**
 
 - 在 `AndroidManifest.xml` 中启用硬件加速：
-    
-    xml
-    
-    <application android:hardwareAccelerated="true">
-    
-    - 硬件加速将部分绘制操作（如 `Canvas` 变换）转移到 `RenderThread`。
-        
+```xml
+<application android:hardwareAccelerated="true">
+```
+	硬件加速将部分绘制操作（如 `Canvas` 变换）转移到 `RenderThread`。   
 
 #### **(4) 监控主线程耗时**
 

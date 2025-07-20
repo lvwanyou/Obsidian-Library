@@ -1,5 +1,7 @@
 你提到的关键点非常准确！**`TextureView` 的刷新机制确实比普通 `View` 更复杂**，它虽然与 Activity 共用同一个 `Surface`，但其**渲染过程并不完全在主线程执行**。以下是详细解析：
 
+相关的描述也可以参考：[[activity 中的渲染是通过 RenderThread 来实际做的，那 textureView 会经过UI线程推理出 displaylist 然后再通过 RenderThread 渲染吗]] , 其实是有两个线程的。
+
 ---
 
 ### **1. `TextureView` 的渲染线程模型**

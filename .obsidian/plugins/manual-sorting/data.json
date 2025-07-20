@@ -74,12 +74,13 @@
       "日记/2025-07-02/continuation 示例.md",
       "日记/2025-07-02/协程的 suspend 在 java 层是怎么实现啊.md",
       "日记/2025-07-02/profile 中的java 内存、native内存及graphic内存.md",
-      "日记/2025-07-02/App 打包有哪些流程.md",
+      "日记/2025-07-02/activity 中的渲染是通过 RenderThread 来实际做的，那 textureView 会经过UI线程推理出 displaylist 然后再通过 RenderThread 渲染吗.md",
       "日记/2025-07-02/surfaceFlinger 会将 surfaceView 的surface 内容和 activity的surface 内容组合到一起再上屏吗.md",
       "日记/2025-07-02/正常的 activity 中的都有 surface 吗，不是只有 surfaceview 或者 textureView 这些才有 surface 吗.md",
       "日记/2025-07-02/View 系统的层级限制 及 View 的 surface 绘制.md",
       "日记/2025-07-02/SurfaceFlinger 合成界面，最终显示到屏幕。 这个怎么理解啊.md",
-      "日记/2025-07-02/App 启动有哪些步骤.md"
+      "日记/2025-07-02/App 启动有哪些步骤.md",
+      "日记/2025-07-02/App 打包有哪些流程.md"
     ],
     "日记/2025-07-03": [
       "日记/2025-07-03/textureView 和 activity 共用一个 surface， 那 textureView 的刷新也是在主线程吗.md",
