@@ -41,12 +41,12 @@ wm.addView(decorView, l); // 将 DecorView 添加到 WindowManager
 
 #### **(2) 视图的层级关系**
 
-text
-
+```text
 Window
 └── DecorView
     ├── TitleBar（可选）
     └── ContentView（setContentView() 设置的布局）
+```
 
 #### **(3) 事件分发流程**
 
