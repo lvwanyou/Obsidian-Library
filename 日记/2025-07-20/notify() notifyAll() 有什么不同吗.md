@@ -23,15 +23,14 @@
     
 - `notify()` 从队列中随机选择一个线程唤醒，`notifyAll()` 唤醒所有线程。
     
-
-java
-
+```java
 synchronized (lock) {
     while (conditionNotMet) {
         lock.wait(); // 线程进入等待队列
     }
     // 被唤醒后继续执行
 }
+```
 
 ### **(2) 唤醒后的行为**
 
@@ -48,28 +47,25 @@ synchronized (lock) {
 
 - **`notify()` 更高效**：  
     生产者只需唤醒一个消费者线程，避免无效竞争。
-    
-
-java
-
+```java
 // 生产者代码
 synchronized (queue) {
     queue.add(item);
     queue.notify(); // 唤醒一个消费者
 }
+```
 
 ### **(2) 多条件等待（复杂协作）**
 
 - **必须用 `notifyAll()`**：  
     多个线程等待不同条件（如线程A等数据，线程B等空间），需全部唤醒重新检查。
     
-
-java
-
+```java
 synchronized (lock) {
     capacity = MAX;
     lock.notifyAll(); // 所有等待线程重新检查条件
 }
+```
 
 ---
 
@@ -77,8 +73,7 @@ synchronized (lock) {
 
 ### **(1) 误用 `notify()` 导致线程饥饿**
 
-java
-
+```java
 // 错误示例：可能让某些线程永远无法被唤醒
 synchronized (lock) {
     if (condition) {
@@ -86,17 +81,20 @@ synchronized (lock) {
     }
 }
 
+```
+
+
 ### **(2) 忽略条件检查**
 
 即使使用 `notifyAll()`，也必须用 `while` 循环检查条件：
 
-java
-
+```java
 synchronized (lock) {
     while (!condition) { // 必须用 while，不能用 if！
         lock.wait();
     }
 }
+```
 
 ---
 
@@ -120,8 +118,7 @@ synchronized (lock) {
 
 ### **(1) 正确使用 `notify()`（单消费者）**
 
-java
-
+```java
 // 生产者
 synchronized (queue) {
     queue.add(item);
@@ -135,11 +132,11 @@ synchronized (queue) {
     }
     queue.remove();
 }
+```
 
 ### **(2) 必须用 `notifyAll()`（多条件等待）**
 
-java
-
+```java
 // 线程A：等待数据
 synchronized (lock) {
     while (!hasData) {
@@ -160,6 +157,7 @@ synchronized (lock) {
     hasSpace = true;
     lock.notifyAll(); // 必须唤醒所有线程重新检查
 }
+```
 
 ---
 
